@@ -1,0 +1,39 @@
+// Run JUnit 5 with Gradle
+// See https://github.com/junit-team/junit5-samples/blob/master/junit5-jupiter-starter-gradle
+
+plugins {
+    id 'java'
+    id 'eclipse' // optional (to generate Eclipse project files)
+    id 'idea' // optional (to generate IntelliJ IDEA project files)
+}
+
+group = "org.codecop"
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // setup JUnit 5
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+
+    // add different/alternative assertion libraries
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+    testImplementation "org.assertj:assertj-core:3.11.1"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "skipped", "failed"
+	}
+}
